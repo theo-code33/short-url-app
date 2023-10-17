@@ -33,3 +33,9 @@ export type UserCtx = {
   token: string;
   setToken: React.Dispatch<React.SetStateAction<string>>;
 };
+
+export type Token = {
+  email: string;
+  exp: number;
+  iat: number;
+};
