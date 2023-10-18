@@ -11,6 +11,7 @@ import {
 import { UserConnect, UserCreate } from "@/types";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
+import { enqueueSnackbar } from "notistack";
 
 const FormConnect = () => {
   const [selected, setSelected] = useState("login");
@@ -57,8 +58,9 @@ const FormConnect = () => {
           router.push("/admin/dashboard");
         });
     } else {
-      // TODO : add error message
-      console.log("error login");
+      enqueueSnackbar("Une erreur est survenue veuillez réessayer", {
+        variant: "error",
+      });
     }
   };
 
@@ -82,8 +84,9 @@ const FormConnect = () => {
           router.push("/admin/dashboard");
         });
     } else {
-      // TODO : add error message
-      console.log("error register");
+      enqueueSnackbar("Une erreur est survenue veuillez réessayer", {
+        variant: "error",
+      });
     }
   };
 
