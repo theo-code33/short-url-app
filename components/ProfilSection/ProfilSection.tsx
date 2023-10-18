@@ -1,10 +1,14 @@
 import { UserContext } from "@/context/UserContext";
-import { User } from "@/types";
+import { User, UserUpdate } from "@/types";
 import { Button, Input } from "@nextui-org/react";
 import { useContext, useEffect, useState } from "react";
 
 const ProfilSection = ({ user }: { user: User }) => {
-  const [modifiedUser, setModifiedUser] = useState<User>({ ...user });
+  const [modifiedUser, setModifiedUser] = useState<UserUpdate>({
+    email: "",
+    firstname: "",
+    lastname: "",
+  });
   const [isModified, setIsModified] = useState<boolean>(false);
 
   const { setUser } = useContext(UserContext);
@@ -17,8 +21,8 @@ const ProfilSection = ({ user }: { user: User }) => {
   };
 
   const updateUser = async () => {
-    await fetch("/api/updateUser", {
-      method: "PUT",
+    await fetch(`/api/updateUser?id=${user.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -36,7 +40,11 @@ const ProfilSection = ({ user }: { user: User }) => {
   };
 
   useEffect(() => {
-    setModifiedUser({ ...user });
+    setModifiedUser({
+      email: user.email,
+      firstname: user.firstname,
+      lastname: user.lastname,
+    });
   }, [user]);
   return (
     <>

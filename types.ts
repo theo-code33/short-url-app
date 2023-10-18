@@ -20,6 +20,12 @@ export type User = {
   apiKeys: ApiKey[];
 };
 
+export type UserUpdate = {
+  email: string;
+  firstname: string;
+  lastname: string;
+};
+
 export type Url = {
   id: number;
   baseUrl: string;
