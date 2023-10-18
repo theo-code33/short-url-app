@@ -21,8 +21,8 @@ export type User = {
 
 export type Url = {
   id: number;
-  url: string;
-  shortUrl: string;
+  baseUrl: string;
+  slug: string;
   userId: number;
   user: User;
 };
