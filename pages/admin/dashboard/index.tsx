@@ -1,3 +1,4 @@
+import TableApiKey from "@/components/TableApiKey/TableApiKey";
 import TableUrl from "@/components/TableUrl";
 import { UserContext } from "@/context/UserContext";
 import { Token, Url } from "@/types";
@@ -41,8 +42,9 @@ const Dashboard = () => {
     <div>
       <h1>Dashboard</h1>
       <p>{user?.email}</p>
-      <div className="flex justify-center">
+      <div className="flex justify-center flex-col gap-20 items-center	">
         {user?.urls && <TableUrl urls={user?.urls as Url[]} />}
+        {user?.apiKeys && <TableApiKey apiKeys={user?.apiKeys} />}
       </div>
     </div>
   );
