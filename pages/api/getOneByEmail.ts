@@ -3,7 +3,7 @@ import instance from "./instance";
 
 const getOneByEmail = async (req: NextApiRequest, res: NextApiResponse) => {
   const { email } = req.query;
-  const response = await instance.get(`/user/${email}`);
+  const response = await instance.get(`/user?email=${email}`);
   res.status(200).json(response.data);
 };
 
