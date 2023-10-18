@@ -36,6 +36,7 @@ const Dashboard = () => {
       })
       .catch((err) => {
         console.log(err);
+        localStorage.removeItem("token");
         router.push("/admin");
       });
   };
