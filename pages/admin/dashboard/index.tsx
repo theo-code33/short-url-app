@@ -42,7 +42,7 @@ const Dashboard = () => {
     <div>
       <h1>Dashboard</h1>
       <p>{user?.email}</p>
-      <div className="flex justify-center flex-col gap-20 items-center	">
+      <div className="flex justify-center flex-col items-center">
         {user?.urls && <TableUrl urls={user?.urls as Url[]} />}
         {user?.apiKeys && <TableApiKey apiKeys={user?.apiKeys} />}
       </div>

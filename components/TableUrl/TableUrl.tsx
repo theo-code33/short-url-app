@@ -10,12 +10,10 @@ import {
   Button,
 } from "@nextui-org/react";
 import { Url } from "@/types";
+import { enqueueSnackbar } from "notistack";
 
 const TableUrl = ({ urls }: { urls: Url[] }) => {
   const deleteUrl = async (slug: string) => {
-    console.log("delete", slug);
-    console.log("token", localStorage.getItem("token"));
-
     await fetch(`/api/deleteUrl?slug=${slug}`, {
       method: "DELETE",
       headers: {
@@ -25,7 +23,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("jnjijnijnin");
+        enqueueSnackbar("Url supprimée", { variant: "success" });
       })
       .catch((err) => {
         console.log("error");
