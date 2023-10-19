@@ -160,10 +160,6 @@ Vous pouvez maintenant installer votre application frontend.
    - Envoyez une requête POST à l'URL `/api/v0/url` avec un body JSON contenant l'URL longue.
    - Vous obtiendrez une réponse JSON contenant l'URL raccourcie unique associée à l'URL d'origine.
 
-## Contribution
-
-Si vous souhaitez contribuer à ce projet, veuillez consulter le fichier [CONTRIBUTING.md](CONTRIBUTING.md) pour obtenir des informations sur la manière de contribuer.
-
 ## Licence
 
-Ce projet est sous licence MIT. Consultez le fichier [LICENSE](LICENSE) pour plus d'informations.
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://github.com/theo-code33/short-url-app">ShortURL Generator</a> by <span property="cc:attributionName">Théo Gillet & Louis Bouet</span> is marked with <a href="http://creativecommons.org/publicdomain/zero/1.0?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC0 1.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/zero.svg?ref=chooser-v1"></a></p>
