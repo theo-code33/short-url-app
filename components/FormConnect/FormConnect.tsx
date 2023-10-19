@@ -118,9 +118,9 @@ const FormConnect = () => {
                 onChange={(e) => handleChange(e)}
               />
               <p className="text-center text-small">
-                Need to create an account?{" "}
+                Vous n&rsquo;avez pas de compte ?{" "}
                 <Link size="sm" onPress={() => setSelected("sign-up")}>
-                  Sign up
+                  S&rsquo;inscrire
                 </Link>
               </p>
               <div className="flex gap-2 justify-end">
@@ -168,9 +168,9 @@ const FormConnect = () => {
                 onChange={(e) => handleChange(e)}
               />
               <p className="text-center text-small">
-                Already have an account?{" "}
+                Vous avez déjà un compte ?{" "}
                 <Link size="sm" onPress={() => setSelected("login")}>
-                  Login
+                  Se connecter
                 </Link>
               </p>
               <div className="flex gap-2 justify-end">
