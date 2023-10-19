@@ -82,7 +82,10 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
           {apiKeys && apiKeys.length > 0 ? (
             apiKeys.map((key) => (
               <TableRow key={key.id}>
-                <TableCell>{key.apiKey}</TableCell>
+                <TableCell>{`${key.apiKey.slice(
+                  0,
+                  7
+                )}***************************`}</TableCell>
                 <TableCell>
                   <ButtonGroup>
                     <Button

@@ -9,10 +9,12 @@ import {
   ButtonGroup,
   Button,
   Input,
+  Tooltip,
 } from "@nextui-org/react";
 import { Url, User } from "@/types";
 import { enqueueSnackbar } from "notistack";
 import { UserContext } from "@/context/UserContext";
+import { IconCopy, IconExternalLink, IconTrash } from "@tabler/icons-react";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -76,21 +78,18 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
   };
 
   return (
-    <>
-      <Input
-        name="lastname"
-        label="Nom"
-        value={newUrl}
-        onChange={(e) => handleChange(e)}
-      />
-      <Button color="primary" onClick={() => createUrl()}>
-        Créer une url
-      </Button>
-      <Table
-        removeWrapper
-        aria-label="Example static collection table"
-        className="max-w-3xl m-auto"
-      >
+    <div className="flex flex-col gap-y-6">
+      <div className="flex justify-center items-center gap-4">
+        <Input
+          label="Nouvel Url"
+          value={newUrl}
+          onChange={(e) => handleChange(e)}
+        />
+        <Button color="primary" onClick={() => createUrl()}>
+          Créer une url
+        </Button>
+      </div>
+      <Table removeWrapper aria-label="Example static collection table">
         <TableHeader>
           <TableColumn>Base url</TableColumn>
           <TableColumn>Slug</TableColumn>
@@ -101,34 +100,52 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
           {urls && urls.length > 0 ? (
             urls.map((url) => (
               <TableRow key={url.id}>
-                <TableCell>{url.baseUrl}</TableCell>
+                <TableCell>
+                  <Tooltip content={url.baseUrl}>
+                    <span>
+                      {url.baseUrl.length > 20
+                        ? `${url.baseUrl.slice(0, 30)}...`
+                        : url.baseUrl}
+                    </span>
+                  </Tooltip>
+                </TableCell>
                 <TableCell>{url.slug}</TableCell>
                 <TableCell>{url.clicks}</TableCell>
                 <TableCell>
-                  <ButtonGroup>
-                    <Button
-                      color="primary"
-                      onClick={() => {
-                        window.navigator.clipboard.writeText(
-                          `${baseUrl}/${url.slug}`
-                        );
-                        enqueueSnackbar("Url copiée", { variant: "success" });
-                      }}
-                    >
-                      Copier
-                    </Button>
-                    <Button
-                      color="success"
-                      onClick={() => {
-                        window.open(`${baseUrl}/${url.slug}`);
-                      }}
-                    >
-                      Ouvrir
-                    </Button>
-                    <Button color="danger" onClick={() => deleteUrl(url.slug)}>
-                      Supprimer
-                    </Button>
-                  </ButtonGroup>
+                  <div className="flex gap-4 items-center">
+                    <Tooltip content="Copier">
+                      <Button
+                        isIconOnly
+                        onClick={() => {
+                          window.navigator.clipboard.writeText(
+                            `${baseUrl}/${url.slug}`
+                          );
+                          enqueueSnackbar("Url copiée", { variant: "success" });
+                        }}
+                      >
+                        <IconCopy />
+                      </Button>
+                    </Tooltip>
+                    <Tooltip content="Ouvrir dans un nouvel onglet">
+                      <Button
+                        isIconOnly
+                        onClick={() => {
+                          window.open(`${baseUrl}/${url.slug}`);
+                        }}
+                      >
+                        <IconExternalLink />
+                      </Button>
+                    </Tooltip>
+                    <Tooltip content="Supprimer l'url">
+                      <Button
+                        isIconOnly
+                        color="danger"
+                        onClick={() => deleteUrl(url.slug)}
+                      >
+                        <IconTrash />
+                      </Button>
+                    </Tooltip>
+                  </div>
                 </TableCell>
               </TableRow>
             ))
@@ -142,7 +159,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
           )}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };
 
