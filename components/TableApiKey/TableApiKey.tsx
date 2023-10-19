@@ -50,7 +50,6 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setUser({
           ...user,
           apiKeys: [...(user?.apiKeys as ApiKey[]), data],
