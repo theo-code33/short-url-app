@@ -94,8 +94,25 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
                 <TableCell>{url.slug}</TableCell>
                 <TableCell>
                   <ButtonGroup>
-                    <Button color="primary">Copier</Button>
-                    <Button color="success">Ouvrir</Button>
+                    <Button
+                      color="primary"
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          `http://localhost:3001/${url.slug}`
+                        );
+                        enqueueSnackbar("Url copiée", { variant: "success" });
+                      }}
+                    >
+                      Copier
+                    </Button>
+                    <Button
+                      color="success"
+                      onClick={() => {
+                        window.open(`http://localhost:3001/${url.slug}`);
+                      }}
+                    >
+                      Ouvrir
+                    </Button>
                     <Button color="danger" onClick={() => deleteUrl(url.slug)}>
                       Supprimer
                     </Button>
