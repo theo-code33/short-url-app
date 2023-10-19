@@ -94,6 +94,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
         <TableHeader>
           <TableColumn>Base url</TableColumn>
           <TableColumn>Slug</TableColumn>
+          <TableColumn>Clicks</TableColumn>
           <TableColumn>Actions</TableColumn>
         </TableHeader>
         <TableBody>
@@ -102,6 +103,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
               <TableRow key={url.id}>
                 <TableCell>{url.baseUrl}</TableCell>
                 <TableCell>{url.slug}</TableCell>
+                <TableCell>{url.clicks}</TableCell>
                 <TableCell>
                   <ButtonGroup>
                     <Button
@@ -132,6 +134,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
             ))
           ) : (
             <TableRow>
+              <TableCell align="center">No urls</TableCell>
               <TableCell align="center">No urls</TableCell>
               <TableCell align="center">No urls</TableCell>
               <TableCell align="center">No urls</TableCell>

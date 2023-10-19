@@ -31,6 +31,7 @@ export type Url = {
   baseUrl: string;
   slug: string;
   user: User;
+  clicks: number;
 };
 
 export type ApiKey = {
