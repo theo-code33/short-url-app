@@ -1,9 +1,8 @@
 import { UserContext } from "@/context/UserContext";
-import { ApiKey } from "@/types";
+import { ApiKey, User } from "@/types";
 import {
   Button,
   ButtonGroup,
-  Input,
   Table,
   TableBody,
   TableCell,
@@ -15,7 +14,7 @@ import { enqueueSnackbar } from "notistack";
 import { useContext } from "react";
 
 const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const deleteApiKey = async (id: number) => {
     await fetch(`/api/deleteApiKey?id=${id}`, {
       method: "DELETE",
@@ -47,6 +46,11 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
+        setUser({
+          ...user,
+          apiKeys: [...(user?.apiKeys as ApiKey[]), data],
+        } as User);
         enqueueSnackbar("Clé api créée", { variant: "success" });
       })
       .catch((err) => {
