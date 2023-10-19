@@ -2,7 +2,7 @@ import ProfilSection from "@/components/ProfilSection";
 import TableApiKey from "@/components/TableApiKey";
 import TableUrl from "@/components/TableUrl";
 import { UserContext } from "@/context/UserContext";
-import { Token, Url, User } from "@/types";
+import { ApiKey, Token, Url, User } from "@/types";
 import { getUserFromLocalToken } from "@/utils/jwt";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
@@ -45,8 +45,8 @@ const Dashboard = () => {
       <h1>Dashboard</h1>
       <ProfilSection user={user as User} />
       <div className="flex justify-center flex-col items-center">
-        {user?.urls && <TableUrl urls={user?.urls as Url[]} />}
-        {user?.apiKeys && <TableApiKey apiKeys={user?.apiKeys} />}
+        <TableUrl urls={user?.urls as Url[]} />
+        <TableApiKey apiKeys={user?.apiKeys as ApiKey[]} />
       </div>
     </div>
   );

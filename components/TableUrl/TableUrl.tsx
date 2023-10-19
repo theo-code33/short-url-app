@@ -10,14 +10,16 @@ import {
   Button,
   Input,
 } from "@nextui-org/react";
-import { Url } from "@/types";
+import { Url, User } from "@/types";
 import { enqueueSnackbar } from "notistack";
 import { UserContext } from "@/context/UserContext";
+
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 const TableUrl = ({ urls }: { urls: Url[] }) => {
   const [newUrl, setNewUrl] = useState<string>("");
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const deleteUrl = async (slug: string) => {
     await fetch(`/api/deleteUrl?slug=${slug}`, {
@@ -29,6 +31,10 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setUser({
+          ...user,
+          urls: (user?.urls as Url[]).filter((url) => url.slug !== slug),
+        } as User);
         enqueueSnackbar("Url supprimée", { variant: "success" });
       })
       .catch((err) => {
@@ -55,6 +61,10 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setUser({
+          ...user,
+          urls: [...(user?.urls as Url[]), data],
+        } as User);
         enqueueSnackbar("Url créée", { variant: "success" });
       })
       .catch((err) => {
@@ -84,18 +94,37 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
         <TableHeader>
           <TableColumn>Base url</TableColumn>
           <TableColumn>Slug</TableColumn>
+          <TableColumn>Clicks</TableColumn>
           <TableColumn>Actions</TableColumn>
         </TableHeader>
         <TableBody>
-          {urls.length > 0 ? (
+          {urls && urls.length > 0 ? (
             urls.map((url) => (
               <TableRow key={url.id}>
                 <TableCell>{url.baseUrl}</TableCell>
                 <TableCell>{url.slug}</TableCell>
+                <TableCell>{url.clicks}</TableCell>
                 <TableCell>
                   <ButtonGroup>
-                    <Button color="primary">Copier</Button>
-                    <Button color="success">Ouvrir</Button>
+                    <Button
+                      color="primary"
+                      onClick={() => {
+                        window.navigator.clipboard.writeText(
+                          `${baseUrl}/${url.slug}`
+                        );
+                        enqueueSnackbar("Url copiée", { variant: "success" });
+                      }}
+                    >
+                      Copier
+                    </Button>
+                    <Button
+                      color="success"
+                      onClick={() => {
+                        window.open(`${baseUrl}/${url.slug}`);
+                      }}
+                    >
+                      Ouvrir
+                    </Button>
                     <Button color="danger" onClick={() => deleteUrl(url.slug)}>
                       Supprimer
                     </Button>
@@ -105,6 +134,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
             ))
           ) : (
             <TableRow>
+              <TableCell align="center">No urls</TableCell>
               <TableCell align="center">No urls</TableCell>
               <TableCell align="center">No urls</TableCell>
               <TableCell align="center">No urls</TableCell>

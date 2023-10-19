@@ -1,10 +1,8 @@
 import { UserContext } from "@/context/UserContext";
-import createApiKey from "@/pages/api/createApiKey";
-import { ApiKey } from "@/types";
+import { ApiKey, User } from "@/types";
 import {
   Button,
   ButtonGroup,
-  Input,
   Table,
   TableBody,
   TableCell,
@@ -16,7 +14,7 @@ import { enqueueSnackbar } from "notistack";
 import { useContext } from "react";
 
 const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
   const deleteApiKey = async (id: number) => {
     await fetch(`/api/deleteApiKey?id=${id}`, {
       method: "DELETE",
@@ -27,7 +25,11 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        enqueueSnackbar("Url supprimée", { variant: "success" });
+        setUser({
+          ...user,
+          apiKeys: (user?.apiKeys as ApiKey[]).filter((key) => key.id !== id),
+        } as User);
+        enqueueSnackbar("Clé Api supprimée", { variant: "success" });
       })
       .catch((err) => {
         enqueueSnackbar("Erreur lors de la suppression de la clé api", {
@@ -48,6 +50,10 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setUser({
+          ...user,
+          apiKeys: [...(user?.apiKeys as ApiKey[]), data],
+        } as User);
         enqueueSnackbar("Clé api créée", { variant: "success" });
       })
       .catch((err) => {
@@ -73,7 +79,7 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
           <TableColumn>Actions</TableColumn>
         </TableHeader>
         <TableBody>
-          {apiKeys.length > 0 ? (
+          {apiKeys && apiKeys.length > 0 ? (
             apiKeys.map((key) => (
               <TableRow key={key.id}>
                 <TableCell>{key.apiKey}</TableCell>
@@ -83,6 +89,9 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
                       color="primary"
                       onClick={() => {
                         window.navigator.clipboard.writeText(key.apiKey);
+                        enqueueSnackbar("Clé api copiée", {
+                          variant: "success",
+                        });
                       }}
                     >
                       Copier
