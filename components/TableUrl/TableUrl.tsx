@@ -45,8 +45,6 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
 
   const createUrl = async () => {
     if (newUrl === "") return enqueueSnackbar("Url vide", { variant: "error" });
-    console.log(localStorage.getItem("token"));
-
     await fetch(`/api/createUrl`, {
       method: "POST",
       headers: {
