@@ -65,9 +65,13 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
       .then((data) => {
         setUser({
           ...user,
-          urls: [...(user?.urls as Url[]), data],
+          urls: [...(user?.urls as Url[]), { ...data, lastCreated: true }],
         } as User);
-        enqueueSnackbar("Url créée", { variant: "success" });
+        window.navigator.clipboard.writeText(`${baseUrl}/${data.slug}`);
+        enqueueSnackbar(
+          "Votre URL a bien était créée et copier dans votre presse papier",
+          { variant: "success" }
+        );
       })
       .catch((err) => {
         enqueueSnackbar("Erreur lors de la création de l'url", {
@@ -100,7 +104,10 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
         <TableBody>
           {urls && urls.length > 0 ? (
             urls.map((url) => (
-              <TableRow key={url.id}>
+              <TableRow
+                key={url.id}
+                className={url?.lastCreated ? "bg-green-300" : ""}
+              >
                 <TableCell>
                   <Tooltip content={url.baseUrl}>
                     <span>
