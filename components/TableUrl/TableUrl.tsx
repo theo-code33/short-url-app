@@ -107,7 +107,9 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
                     <Button
                       color="primary"
                       onClick={() => {
-                        navigator.clipboard.writeText(`${baseUrl}/${url.slug}`);
+                        window.navigator.clipboard.writeText(
+                          `${baseUrl}/${url.slug}`
+                        );
                         enqueueSnackbar("Url copiée", { variant: "success" });
                       }}
                     >

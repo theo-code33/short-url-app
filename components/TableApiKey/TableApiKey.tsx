@@ -90,6 +90,9 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
                       color="primary"
                       onClick={() => {
                         window.navigator.clipboard.writeText(key.apiKey);
+                        enqueueSnackbar("Clé api copiée", {
+                          variant: "success",
+                        });
                       }}
                     >
                       Copier
