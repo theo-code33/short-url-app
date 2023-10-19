@@ -10,7 +10,7 @@ import {
   Button,
   Input,
 } from "@nextui-org/react";
-import { Url } from "@/types";
+import { Url, User } from "@/types";
 import { enqueueSnackbar } from "notistack";
 import { UserContext } from "@/context/UserContext";
 
@@ -19,7 +19,7 @@ const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 const TableUrl = ({ urls }: { urls: Url[] }) => {
   const [newUrl, setNewUrl] = useState<string>("");
 
-  const { user } = useContext(UserContext);
+  const { user, setUser } = useContext(UserContext);
 
   const deleteUrl = async (slug: string) => {
     await fetch(`/api/deleteUrl?slug=${slug}`, {
@@ -31,6 +31,10 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setUser({
+          ...user,
+          urls: (user?.urls as Url[]).filter((url) => url.slug !== slug),
+        } as User);
         enqueueSnackbar("Url supprimée", { variant: "success" });
       })
       .catch((err) => {
@@ -57,6 +61,10 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setUser({
+          ...user,
+          urls: [...(user?.urls as Url[]), data],
+        } as User);
         enqueueSnackbar("Url créée", { variant: "success" });
       })
       .catch((err) => {

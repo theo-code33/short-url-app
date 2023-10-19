@@ -25,6 +25,10 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
+        setUser({
+          ...user,
+          apiKeys: (user?.apiKeys as ApiKey[]).filter((key) => key.id !== id),
+        } as User);
         enqueueSnackbar("Clé Api supprimée", { variant: "success" });
       })
       .catch((err) => {
