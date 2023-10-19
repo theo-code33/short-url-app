@@ -44,7 +44,7 @@ const Dashboard = () => {
     <div>
       <h1>Dashboard</h1>
       <ProfilSection user={user as User} />
-      <div className="flex justify-center flex-col items-center">
+      <div className="flex justify-center flex-col items-center max-w-3xl m-auto gap-10">
         <TableUrl urls={user?.urls as Url[]} />
         <TableApiKey apiKeys={user?.apiKeys as ApiKey[]} />
       </div>

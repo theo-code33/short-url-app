@@ -78,15 +78,16 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
   };
 
   return (
-    <div className="flex flex-col gap-y-6">
-      <div className="flex justify-center items-center gap-4">
+    <div className="w-full">
+      <h2 className="text-2xl font-bold mb-3">Mes urls</h2>
+      <div className="flex justify-center items-center gap-4 mb-5">
         <Input
-          label="Nouvel Url"
+          label="Coller une url"
           value={newUrl}
           onChange={(e) => handleChange(e)}
         />
         <Button color="primary" onClick={() => createUrl()}>
-          Créer une url
+          Raccourcir mon url
         </Button>
       </div>
       <Table removeWrapper aria-label="Example static collection table">

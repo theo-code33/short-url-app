@@ -9,7 +9,9 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
+  Tooltip,
 } from "@nextui-org/react";
+import { IconCopy, IconTrash } from "@tabler/icons-react";
 import { enqueueSnackbar } from "notistack";
 import { useContext } from "react";
 
@@ -65,14 +67,21 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
   };
 
   return (
-    <>
-      <Button color="primary" onClick={() => createApiKey()}>
-        Générer une nouvelle clé api
-      </Button>
+    <div className="w-full flex flex-col">
+      <h2 className="text-2xl font-bold mb-3">Clés Api</h2>
+      <div className="flex w-full">
+        <Button
+          color="primary"
+          onClick={() => createApiKey()}
+          className="max-w-max mb-5 self-end"
+        >
+          Générer une nouvelle clé api
+        </Button>
+      </div>
       <Table
         removeWrapper
         aria-label="Example static collection table"
-        className="max-w-3xl m-auto pt-4"
+        // className="max-w-3xl m-auto pt-4"
       >
         <TableHeader>
           <TableColumn>Api Key</TableColumn>
@@ -87,22 +96,30 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
                   7
                 )}***************************`}</TableCell>
                 <TableCell>
-                  <ButtonGroup>
-                    <Button
-                      color="primary"
-                      onClick={() => {
-                        window.navigator.clipboard.writeText(key.apiKey);
-                        enqueueSnackbar("Clé api copiée", {
-                          variant: "success",
-                        });
-                      }}
-                    >
-                      Copier
-                    </Button>
-                    <Button color="danger" onClick={() => deleteApiKey(key.id)}>
-                      Supprimer
-                    </Button>
-                  </ButtonGroup>
+                  <div className="flex gap-4 items-center">
+                    <Tooltip content="Copier la clé api">
+                      <Button
+                        isIconOnly
+                        onClick={() => {
+                          window.navigator.clipboard.writeText(key.apiKey);
+                          enqueueSnackbar("Clé api copiée", {
+                            variant: "success",
+                          });
+                        }}
+                      >
+                        <IconCopy />
+                      </Button>
+                    </Tooltip>
+                    <Tooltip content="Supprimer la clé api">
+                      <Button
+                        isIconOnly
+                        color="danger"
+                        onClick={() => deleteApiKey(key.id)}
+                      >
+                        <IconTrash />
+                      </Button>
+                    </Tooltip>
+                  </div>
                 </TableCell>
               </TableRow>
             ))
@@ -114,7 +131,7 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
           )}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };
 
