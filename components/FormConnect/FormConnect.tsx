@@ -91,99 +91,99 @@ const FormConnect = () => {
   };
 
   return (
-    <div>
-      <Card className="form-connect">
-        <CardBody className="overflow-hidden">
-          <Tabs
-            fullWidth
-            size="md"
-            aria-label="Tabs form"
-            selectedKey={selected}
-            onSelectionChange={setSelected}
-          >
-            <Tab key="login" title="Se connecter">
-              <form className="flex flex-col gap-4">
-                <Input
-                  isRequired
-                  label="Email"
-                  type="email"
-                  name="email"
-                  onChange={(e) => handleChange(e)}
-                />
-                <Input
-                  isRequired
-                  label="Mot de passe"
-                  type="password"
-                  name="password"
-                  onChange={(e) => handleChange(e)}
-                />
-                <p className="text-center text-small">
-                  Need to create an account?{" "}
-                  <Link size="sm" onPress={() => setSelected("sign-up")}>
-                    Sign up
-                  </Link>
-                </p>
-                <div className="flex gap-2 justify-end">
-                  <Button fullWidth color="primary" onClick={handleLogin}>
-                    Se connecter
-                  </Button>
-                </div>
-              </form>
-            </Tab>
-            <Tab key="sign-up" title="S&rsquo;inscrire">
-              <form className="flex flex-col gap-4 h-[300px]">
-                <Input
-                  isRequired
-                  label="Prénom"
-                  type="text"
-                  name="firstname"
-                  onChange={(e) => handleChange(e)}
-                />
-                <Input
-                  isRequired
-                  label="Nom"
-                  type="text"
-                  name="lastname"
-                  onChange={(e) => handleChange(e)}
-                />
-                <Input
-                  isRequired
-                  label="Email"
-                  type="email"
-                  name="email"
-                  onChange={(e) => handleChange(e)}
-                />
-                <Input
-                  isRequired
-                  label="Mot de passe"
-                  type="password"
-                  name="password"
-                  onChange={(e) => handleChange(e)}
-                />
-                <Input
-                  isRequired
-                  label="Confirmez votre mot de passe"
-                  type="password"
-                  name="passwordConfirm"
-                  onChange={(e) => handleChange(e)}
-                />
-                <p className="text-center text-small">
-                  Already have an account?{" "}
-                  <Link size="sm" onPress={() => setSelected("login")}>
-                    Login
-                  </Link>
-                </p>
-                <div className="flex gap-2 justify-end">
-                  <Button fullWidth color="primary" onClick={handleRegister}>
-                    S&rsquo;inscrire
-                  </Button>
-                </div>
-              </form>
-            </Tab>
-          </Tabs>
-        </CardBody>
-      </Card>
-    </div>
+    // <div className="h-max">
+    <Card className="form-connect">
+      <CardBody className="h-full">
+        <Tabs
+          fullWidth
+          size="md"
+          aria-label="Tabs form"
+          selectedKey={selected}
+          onSelectionChange={setSelected}
+        >
+          <Tab key="login" title="Se connecter">
+            <form className="flex flex-col gap-4">
+              <Input
+                isRequired
+                label="Email"
+                type="email"
+                name="email"
+                onChange={(e) => handleChange(e)}
+              />
+              <Input
+                isRequired
+                label="Mot de passe"
+                type="password"
+                name="password"
+                onChange={(e) => handleChange(e)}
+              />
+              <p className="text-center text-small">
+                Need to create an account?{" "}
+                <Link size="sm" onPress={() => setSelected("sign-up")}>
+                  Sign up
+                </Link>
+              </p>
+              <div className="flex gap-2 justify-end">
+                <Button fullWidth color="primary" onClick={handleLogin}>
+                  Se connecter
+                </Button>
+              </div>
+            </form>
+          </Tab>
+          <Tab key="sign-up" title="S&rsquo;inscrire">
+            <form className="flex flex-col gap-4">
+              <Input
+                isRequired
+                label="Prénom"
+                type="text"
+                name="firstname"
+                onChange={(e) => handleChange(e)}
+              />
+              <Input
+                isRequired
+                label="Nom"
+                type="text"
+                name="lastname"
+                onChange={(e) => handleChange(e)}
+              />
+              <Input
+                isRequired
+                label="Email"
+                type="email"
+                name="email"
+                onChange={(e) => handleChange(e)}
+              />
+              <Input
+                isRequired
+                label="Mot de passe"
+                type="password"
+                name="password"
+                onChange={(e) => handleChange(e)}
+              />
+              <Input
+                isRequired
+                label="Confirmez votre mot de passe"
+                type="password"
+                name="passwordConfirm"
+                onChange={(e) => handleChange(e)}
+              />
+              <p className="text-center text-small">
+                Already have an account?{" "}
+                <Link size="sm" onPress={() => setSelected("login")}>
+                  Login
+                </Link>
+              </p>
+              <div className="flex gap-2 justify-end">
+                <Button fullWidth color="primary" onClick={handleRegister}>
+                  S&rsquo;inscrire
+                </Button>
+              </div>
+            </form>
+          </Tab>
+        </Tabs>
+      </CardBody>
+    </Card>
+    // </div>
   );
 };
 

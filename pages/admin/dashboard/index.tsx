@@ -31,6 +31,7 @@ const Dashboard = () => {
           setUser(data);
           router.push("/admin/dashboard");
         } else {
+          localStorage.removeItem("token");
           router.push("/admin");
         }
       })
