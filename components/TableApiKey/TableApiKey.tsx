@@ -30,8 +30,10 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
         enqueueSnackbar("Url supprimée", { variant: "success" });
       })
       .catch((err) => {
-        console.log("error");
-        console.log(err);
+        enqueueSnackbar("Erreur lors de la suppression de la clé api", {
+          variant: "error",
+        });
+        console.error(err);
       });
   };
 
@@ -49,8 +51,10 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
         enqueueSnackbar("Clé api créée", { variant: "success" });
       })
       .catch((err) => {
-        console.log("error");
-        console.log(err);
+        enqueueSnackbar("Erreur lors de la création de la clé api", {
+          variant: "error",
+        });
+        console.error(err);
       });
   };
 

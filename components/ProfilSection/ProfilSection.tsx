@@ -1,6 +1,7 @@
 import { UserContext } from "@/context/UserContext";
 import { User, UserUpdate } from "@/types";
 import { Button, Input } from "@nextui-org/react";
+import { enqueueSnackbar } from "notistack";
 import { useContext, useEffect, useState } from "react";
 
 const ProfilSection = ({ user }: { user: User }) => {
@@ -35,7 +36,8 @@ const ProfilSection = ({ user }: { user: User }) => {
         setIsModified(false);
       })
       .catch((err) => {
-        console.log(err);
+        enqueueSnackbar("Erreur lors de la modification", { variant: "error" });
+        console.error(err);
       });
   };
 

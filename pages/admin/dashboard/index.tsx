@@ -1,5 +1,5 @@
 import ProfilSection from "@/components/ProfilSection";
-import TableApiKey from "@/components/TableApiKey/TableApiKey";
+import TableApiKey from "@/components/TableApiKey";
 import TableUrl from "@/components/TableUrl";
 import { UserContext } from "@/context/UserContext";
 import { Token, Url, User } from "@/types";

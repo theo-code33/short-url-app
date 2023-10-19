@@ -32,8 +32,10 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
         enqueueSnackbar("Url supprimée", { variant: "success" });
       })
       .catch((err) => {
-        console.log("error");
-        console.log(err);
+        enqueueSnackbar("Erreur lors de la suppression de l'url", {
+          variant: "error",
+        });
+        console.error(err);
       });
   };
 
@@ -58,8 +60,10 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
         enqueueSnackbar("Url créée", { variant: "success" });
       })
       .catch((err) => {
-        console.log("error");
-        console.log(err);
+        enqueueSnackbar("Erreur lors de la création de l'url", {
+          variant: "error",
+        });
+        console.error(err);
       });
   };
 
