@@ -1,5 +1,8 @@
+import ProfilSection from "@/components/ProfilSection";
+import TableApiKey from "@/components/TableApiKey";
+import TableUrl from "@/components/TableUrl";
 import { UserContext } from "@/context/UserContext";
-import { Token } from "@/types";
+import { Token, Url, User } from "@/types";
 import { getUserFromLocalToken } from "@/utils/jwt";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
@@ -40,7 +43,11 @@ const Dashboard = () => {
   return (
     <div>
       <h1>Dashboard</h1>
-      <p>{user?.email}</p>
+      <ProfilSection user={user as User} />
+      <div className="flex justify-center flex-col items-center">
+        {user?.urls && <TableUrl urls={user?.urls as Url[]} />}
+        {user?.apiKeys && <TableApiKey apiKeys={user?.apiKeys} />}
+      </div>
     </div>
   );
 };

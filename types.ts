@@ -17,13 +17,25 @@ export type User = {
   firstname: string;
   lastname: string;
   urls: Url[];
+  apiKeys: ApiKey[];
+};
+
+export type UserUpdate = {
+  email: string;
+  firstname: string;
+  lastname: string;
 };
 
 export type Url = {
   id: number;
-  url: string;
-  shortUrl: string;
-  userId: number;
+  baseUrl: string;
+  slug: string;
+  user: User;
+};
+
+export type ApiKey = {
+  id: number;
+  apiKey: string;
   user: User;
 };
 
