@@ -31,6 +31,7 @@ const Dashboard = () => {
           setUser(data);
           router.push("/admin/dashboard");
         } else {
+          localStorage.removeItem("token");
           router.push("/admin");
         }
       })
@@ -42,9 +43,17 @@ const Dashboard = () => {
   };
   return (
     <div>
-      <h1>Dashboard</h1>
-      <ProfilSection user={user as User} />
-      <div className="flex justify-center flex-col items-center">
+      <div className="max-w-3xl m-auto mb-8">
+        <h1 className="text-4xl font-bold">Dashboard</h1>
+        <div>
+          <p>
+            Bienvenue sur votre dashboard, vous pouvez gérer vos urls et vos
+            clés api ici.
+          </p>
+        </div>
+      </div>
+      <div className="flex justify-center flex-col items-center max-w-3xl m-auto gap-10 mb-20">
+        <ProfilSection user={user as User} />
         <TableUrl urls={user?.urls as Url[]} />
         <TableApiKey apiKeys={user?.apiKeys as ApiKey[]} />
       </div>

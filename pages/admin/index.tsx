@@ -15,7 +15,7 @@ const Admin = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
-    <div className="flex aligns-center w-full justify-center h-screen">
+    <div className="flex items-center w-full justify-center h-screen">
       <FormConnect />
     </div>
   );

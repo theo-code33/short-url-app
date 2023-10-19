@@ -9,10 +9,12 @@ import {
   ButtonGroup,
   Button,
   Input,
+  Tooltip,
 } from "@nextui-org/react";
 import { Url, User } from "@/types";
 import { enqueueSnackbar } from "notistack";
 import { UserContext } from "@/context/UserContext";
+import { IconCopy, IconExternalLink, IconTrash } from "@tabler/icons-react";
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -63,9 +65,13 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
       .then((data) => {
         setUser({
           ...user,
-          urls: [...(user?.urls as Url[]), data],
+          urls: [...(user?.urls as Url[]), { ...data, lastCreated: true }],
         } as User);
-        enqueueSnackbar("Url créée", { variant: "success" });
+        window.navigator.clipboard.writeText(`${baseUrl}/${data.slug}`);
+        enqueueSnackbar(
+          "Votre URL a bien était créée et copier dans votre presse papier",
+          { variant: "success" }
+        );
       })
       .catch((err) => {
         enqueueSnackbar("Erreur lors de la création de l'url", {
@@ -76,21 +82,19 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
   };
 
   return (
-    <>
-      <Input
-        name="lastname"
-        label="Nom"
-        value={newUrl}
-        onChange={(e) => handleChange(e)}
-      />
-      <Button color="primary" onClick={() => createUrl()}>
-        Créer une url
-      </Button>
-      <Table
-        removeWrapper
-        aria-label="Example static collection table"
-        className="max-w-3xl m-auto"
-      >
+    <div className="w-full">
+      <h2 className="text-2xl font-bold mb-3">Mes urls</h2>
+      <div className="flex justify-center items-center gap-4 mb-5">
+        <Input
+          label="Coller une url"
+          value={newUrl}
+          onChange={(e) => handleChange(e)}
+        />
+        <Button color="primary" onClick={() => createUrl()}>
+          Raccourcir mon url
+        </Button>
+      </div>
+      <Table removeWrapper aria-label="Example static collection table">
         <TableHeader>
           <TableColumn>Base url</TableColumn>
           <TableColumn>Slug</TableColumn>
@@ -100,35 +104,56 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
         <TableBody>
           {urls && urls.length > 0 ? (
             urls.map((url) => (
-              <TableRow key={url.id}>
-                <TableCell>{url.baseUrl}</TableCell>
+              <TableRow
+                key={url.id}
+                className={url?.lastCreated ? "bg-green-300" : ""}
+              >
+                <TableCell>
+                  <Tooltip content={url.baseUrl}>
+                    <span>
+                      {url.baseUrl.length > 20
+                        ? `${url.baseUrl.slice(0, 30)}...`
+                        : url.baseUrl}
+                    </span>
+                  </Tooltip>
+                </TableCell>
                 <TableCell>{url.slug}</TableCell>
                 <TableCell>{url.clicks}</TableCell>
                 <TableCell>
-                  <ButtonGroup>
-                    <Button
-                      color="primary"
-                      onClick={() => {
-                        window.navigator.clipboard.writeText(
-                          `${baseUrl}/${url.slug}`
-                        );
-                        enqueueSnackbar("Url copiée", { variant: "success" });
-                      }}
-                    >
-                      Copier
-                    </Button>
-                    <Button
-                      color="success"
-                      onClick={() => {
-                        window.open(`${baseUrl}/${url.slug}`);
-                      }}
-                    >
-                      Ouvrir
-                    </Button>
-                    <Button color="danger" onClick={() => deleteUrl(url.slug)}>
-                      Supprimer
-                    </Button>
-                  </ButtonGroup>
+                  <div className="flex gap-4 items-center">
+                    <Tooltip content="Copier">
+                      <Button
+                        isIconOnly
+                        onClick={() => {
+                          window.navigator.clipboard.writeText(
+                            `${baseUrl}/${url.slug}`
+                          );
+                          enqueueSnackbar("Url copiée", { variant: "success" });
+                        }}
+                      >
+                        <IconCopy />
+                      </Button>
+                    </Tooltip>
+                    <Tooltip content="Ouvrir dans un nouvel onglet">
+                      <Button
+                        isIconOnly
+                        onClick={() => {
+                          window.open(`${baseUrl}/${url.slug}`);
+                        }}
+                      >
+                        <IconExternalLink />
+                      </Button>
+                    </Tooltip>
+                    <Tooltip content="Supprimer l'url">
+                      <Button
+                        isIconOnly
+                        color="danger"
+                        onClick={() => deleteUrl(url.slug)}
+                      >
+                        <IconTrash />
+                      </Button>
+                    </Tooltip>
+                  </div>
                 </TableCell>
               </TableRow>
             ))
@@ -142,7 +167,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
           )}
         </TableBody>
       </Table>
-    </>
+    </div>
   );
 };
 

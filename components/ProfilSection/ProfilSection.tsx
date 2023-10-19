@@ -34,6 +34,9 @@ const ProfilSection = ({ user }: { user: User }) => {
       .then((data) => {
         setUser(data);
         setIsModified(false);
+        enqueueSnackbar("Votre profil à bien était modifié", {
+          variant: "success",
+        });
       })
       .catch((err) => {
         enqueueSnackbar("Erreur lors de la modification", { variant: "error" });
@@ -49,40 +52,61 @@ const ProfilSection = ({ user }: { user: User }) => {
     });
   }, [user]);
   return (
-    <>
-      <Input
-        name="firstname"
-        label="Prénom"
-        value={modifiedUser.firstname}
-        isReadOnly={!isModified}
-        onChange={(e) => handleChange(e)}
-      />
-      <Input
-        name="lastname"
-        label="Nom"
-        value={modifiedUser.lastname}
-        isReadOnly={!isModified}
-        onChange={(e) => handleChange(e)}
-      />
-      <Input
-        name="email"
-        label="Email"
-        value={modifiedUser.email}
-        isReadOnly={!isModified}
-        onChange={(e) => handleChange(e)}
-      />
-
-      <Button
-        onClick={() => {
-          if (isModified) {
-            updateUser();
-          }
-          setIsModified(!isModified);
-        }}
-      >
-        {isModified ? "Enregistrer" : "Modifier"}
-      </Button>
-    </>
+    <div className="w-full">
+      <h2 className="text-2xl font-bold mb-3">Mon profil</h2>
+      <div className="flex flex-col gap-6">
+        <div className="flex gap-6">
+          <Input
+            name="firstname"
+            label="Prénom"
+            value={modifiedUser.firstname}
+            isReadOnly={!isModified}
+            onChange={(e) => handleChange(e)}
+          />
+          <Input
+            name="lastname"
+            label="Nom"
+            value={modifiedUser.lastname}
+            isReadOnly={!isModified}
+            onChange={(e) => handleChange(e)}
+          />
+        </div>
+        <Input
+          name="email"
+          label="Email"
+          value={modifiedUser.email}
+          isReadOnly={!isModified}
+          onChange={(e) => handleChange(e)}
+        />
+      </div>
+      <div className="flex mt-5 gap-2">
+        {isModified && (
+          <Button
+            onClick={() => {
+              setIsModified(false);
+              setModifiedUser({
+                email: user.email,
+                firstname: user.firstname,
+                lastname: user.lastname,
+              });
+            }}
+          >
+            Annuler
+          </Button>
+        )}
+        <Button
+          color={isModified ? "primary" : "default"}
+          onClick={() => {
+            if (isModified) {
+              updateUser();
+            }
+            setIsModified(!isModified);
+          }}
+        >
+          {isModified ? "Enregistrer" : "Modifier mon profil"}
+        </Button>
+      </div>
+    </div>
   );
 };
 
