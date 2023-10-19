@@ -1,5 +1,4 @@
 import { UserContext } from "@/context/UserContext";
-import createApiKey from "@/pages/api/createApiKey";
 import { ApiKey } from "@/types";
 import {
   Button,
@@ -27,7 +26,7 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        enqueueSnackbar("Url supprimée", { variant: "success" });
+        enqueueSnackbar("Clé Api supprimée", { variant: "success" });
       })
       .catch((err) => {
         enqueueSnackbar("Erreur lors de la suppression de la clé api", {
@@ -73,7 +72,7 @@ const TableApiKey = ({ apiKeys }: { apiKeys: ApiKey[] }) => {
           <TableColumn>Actions</TableColumn>
         </TableHeader>
         <TableBody>
-          {apiKeys.length > 0 ? (
+          {apiKeys && apiKeys.length > 0 ? (
             apiKeys.map((key) => (
               <TableRow key={key.id}>
                 <TableCell>{key.apiKey}</TableCell>

@@ -14,6 +14,8 @@ import { Url } from "@/types";
 import { enqueueSnackbar } from "notistack";
 import { UserContext } from "@/context/UserContext";
 
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
 const TableUrl = ({ urls }: { urls: Url[] }) => {
   const [newUrl, setNewUrl] = useState<string>("");
 
@@ -87,7 +89,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
           <TableColumn>Actions</TableColumn>
         </TableHeader>
         <TableBody>
-          {urls.length > 0 ? (
+          {urls && urls.length > 0 ? (
             urls.map((url) => (
               <TableRow key={url.id}>
                 <TableCell>{url.baseUrl}</TableCell>
@@ -97,9 +99,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
                     <Button
                       color="primary"
                       onClick={() => {
-                        navigator.clipboard.writeText(
-                          `http://localhost:3001/${url.slug}`
-                        );
+                        navigator.clipboard.writeText(`${baseUrl}/${url.slug}`);
                         enqueueSnackbar("Url copiée", { variant: "success" });
                       }}
                     >
@@ -108,7 +108,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
                     <Button
                       color="success"
                       onClick={() => {
-                        window.open(`http://localhost:3001/${url.slug}`);
+                        window.open(`${baseUrl}/${url.slug}`);
                       }}
                     >
                       Ouvrir
