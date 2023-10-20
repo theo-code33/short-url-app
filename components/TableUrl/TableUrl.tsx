@@ -59,7 +59,7 @@ const TableUrl = ({ urls }: { urls: Url[] }) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-      body: JSON.stringify({ baseUrl: newUrl, user: user?.id }),
+      body: JSON.stringify({ baseUrl: newUrl }),
     })
       .then((res) => res.json())
       .then((data) => {
