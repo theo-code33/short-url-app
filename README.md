@@ -1,25 +1,25 @@
 # ShortURL Generator
 
-Bienvenue dans ShortURL Generator, une application simple permettant de créer des raccourcis pour vos URL.
+Welcome to ShortURL Generator, a simple application for creating shortcuts for your URLs.
 
 ## Synopsis
 
-Ce projet a été réalisé dans le cadre de notre formation à la [l'École Supérieure du Digital](https://www.wildcodeschool.com/fr-FR) de Bordeaux. Il s'agit d'un projet API, l'ojectif était de créer une api en groupe de 2 personnes. Nous avons choisi de créer une API permettant de créer des URL raccourcies.
+This project was carried out as part of our training at [l'École Supérieure du Digital](https://ecole-du-digital.com/) in Bordeaux. It is an API project, and our goal was to create an API in a group of two people. We chose to develop an API for creating shortened URLs.
 
-Pourquoi nous avons choisi ce projet ? Nous sommes en alternance et dans l'entreprise où nous travaillons, nous avons besoin de créer des URL raccourcies. Nous avons donc décidé de créer une API qui nous permettrait de créer des URL raccourcies et que nous pourrions utiliser dans notre entreprise.
+Why did we choose this project? We are working in a company during our apprenticeship, and we often need to create shortened URLs. So, we decided to create an API that would allow us to generate shortened URLs, which we could use in our company.
 
-## Auteurs
+## Authors
 
-[Théo Gillet](https://github.com/theo-code33) et [Louis Bouet](https://github.com/1ouiss) ont réalisé ce projet en 1 semaine.
+[Théo Gillet](https://github.com/theo-code33) and [Louis Bouet](https://github.com/1ouiss) completed this project in one week.
 
-## Fonctionnalités
+## Features
 
-- Création d'un compte utilisateur
-- Génération d'une clé API
-- Génération d'URL raccourcie
-- Redirection vers l'URL d'origine
+- User account creation
+- API key generation
+- Shortened URL generation
+- Redirect to the original URL
 
-## Technologies utilisées
+## Technologies Used
 
 ### Frontend
 
@@ -37,128 +37,128 @@ Pourquoi nous avons choisi ce projet ? Nous sommes en alternance et dans l'entre
 
 ### Prérequis
 
-- [Node.js](https://nodejs.org/) installé sur votre machine
-- [Docker](https://www.docker.com/) installé sur votre machine
+- [Node.js](https://nodejs.org/) installed on your machine
+- [Docker](https://www.docker.com/) installed on your machine
 
-### Étapes d'installation
+### Installation Steps
 
-#### Installation de l'application Backend
+#### Frontend Application Installation
 
-1. Clonez le dépôt depuis GitHub :
-
-   ```sh
-   git clone https://github.com/votre-utilisateur/shorturl-generator.git
-   ```
-
-2. Accédez au répertoire du projet :
+1. Clone the repository from GitHub :
 
    ```sh
-   cd short-url-api
+   git clone https://github.com/theo-code33/short-url-app.git
    ```
 
-3. Créez un fichier `.env` à la racine du projet et ajoutez les variables d'environnement suivantes :
-
-   ```sh
-    # Variables d'environnement pour la connexion à la base de données
-    POSTGRES_PASSWORD=postgres
-    POSTGRES_USER=postgres
-    POSTGRES_DB=postgres
-
-    # Clé secrète pour la génération des tokens JWT
-    JWT_SECRET=secret
-   ```
-
-4. Lancer vos conteneurs Docker :
-
-   ```sh
-    docker-compose up -d
-   ```
-
-5. Installez les dépendances :
-
-   ```sh
-   yarn
-   ```
-
-6. Démarrez l'application :
-
-   ```sh
-   yarn start:dev
-   ```
-
-7. Accédez à la documention de l'API à l'adresse [http://localhost:3000/api](http://localhost:8000/documentation-dev).
-
-Vous pouvez maintenant installer votre application frontend.
-
-#### Installation de l'application Frontend
-
-1. Clonez le dépôt depuis GitHub :
-
-   ```sh
-   git clone https://github.com/votre-utilisateur/shorturl-generator.git
-   ```
-
-2. Accédez au répertoire du projet :
+2. Navigate to the project directory :
 
    ```sh
    cd short-url-app
    ```
 
-3. Créez un fichier `.env` à la racine du projet et ajoutez les variables d'environnement suivantes :
+3. Create a `.env` file at the root of the project and add the following environment variables:
 
    ```sh
-    # Url de base de l'application
+    # Base URL of the application
     NEXT_PUBLIC_BASE_URL=http://localhost:3000
-    # Variables d'environnement pour la connexion à l'API
+    # Environment variables for connecting to the API
     NEXT_API_URL=http://localhost:8000/api/v0
    ```
 
-4. Installez les dépendances :
+4. Install dependencies:
 
    ```sh
    yarn
    ```
 
-5. Démarrez l'application :
+5. Start the application:
 
    ```sh
    yarn dev
    ```
 
-6. Accédez à l'application dans votre navigateur à l'adresse [http://localhost:3000](http://localhost:3000).
+6. Access the application in your browser at [http://localhost:3000](http://localhost:3000).
 
-## Fonctionnement
+If you want to use this application in local with the API, you have to follow the next steps.
 
-### Utilisation de l'interface
+#### Backend Application Installation
 
-1. **Page d'accueil**
+1. Clone the repository from GitHub :
 
-   - Accédez à l'application via le navigateur sur la route `/admin`.
-   - Créé un compte utilisateur
+   ```sh
+   git clone https://github.com/theo-code33/short-url-api.git
+   ```
 
-2. **Génération d'URL raccourcie**
+2. Navigate to the project directory :
 
-   - Saisissez l'URL longue dans le champ prévu.
-   - Cliquez sur le bouton "Créer mon url".
-   - Vous obtiendrez une URL raccourcie unique associée à l'URL d'origine.
+   ```sh
+   cd short-url-api
+   ```
 
-3. **Utilisation de l'URL raccourcie**
+3. Create a .env file at the root of the project and add the following environment variables :
 
-   - Copiez l'URL raccourcie générée.
-   - Collez-la dans le navigateur pour être redirigé vers l'URL d'origine.
+   ```sh
+    # Environment variables for connecting to the database
+    POSTGRES_PASSWORD=postgres
+    POSTGRES_USER=postgres
+    POSTGRES_DB=postgres
 
-### Utilisation de l'API
+    # Secret key for JWT token generation
+    JWT_SECRET=secret
+   ```
 
-1. **Création d'une clé api**
+4. Start your Docker containers :
 
-   - Accédez à l'application via le navigateur sur la route `/admin`.
-   - Créé un compte utilisateur
-   - Générer une clé API
+   ```sh
+    docker-compose up -d
+   ```
 
-2. **Génération d'URL raccourcie**
+5. Install dependencies :
 
-   - Envoyez une requête POST à l'URL `/api/v0/url` avec un body JSON contenant l'URL longue.
-   - Vous obtiendrez une réponse JSON contenant l'URL raccourcie unique associée à l'URL d'origine.
+   ```sh
+   yarn
+   ```
+
+6. Start the application :
+
+   ```sh
+   yarn start:dev
+   ```
+
+7. Access the API documentation at [http://localhost:8000/api/v0/documentation-dev](http://localhost:8000/api/v0/documentation-dev).
+
+## Operation
+
+### Using the Interface
+
+1. **Homepage**
+
+   - Access the application through the browser at the `/admin` route.
+   - Create a user account.
+
+2. **Generating a Shortened URL**
+
+   - Enter the long URL in the provided field.
+   - Click the "Créer mon url" button.
+   - You will receive a unique shortened URL associated with the original URL.
+
+3. **Using the Shortened URL**
+
+   - Copy the generated shortened URL.
+   - Paste it into the browser to be redirected to the original URL.
+
+### Using the API
+
+1. **Creating an API Key**
+
+   - Access the application through the browser at the `/admin` route.
+   - Create a user account
+   - Generate an API key.
+
+2. **Generating a Shortened URL**
+
+   - Send a POST request to the `/api/v0/url` URL with a JSON body containing the long URL.
+   - You will receive a JSON response containing the unique shortened URL associated with the original URL.
 
 ## Licence
 
