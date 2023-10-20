@@ -4,6 +4,7 @@ import TableUrl from "@/components/TableUrl";
 import { UserContext } from "@/context/UserContext";
 import { ApiKey, Token, Url, User } from "@/types";
 import { getUserFromLocalToken } from "@/utils/jwt";
+import { Button } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 
@@ -51,6 +52,16 @@ const Dashboard = () => {
             clés api ici.
           </p>
         </div>
+        <Button
+          onClick={() => {
+            window.open(
+              `${process.env.NEXT_PUBLIC_API_URL}/documentation`,
+              "_blank"
+            );
+          }}
+        >
+          Documentation API
+        </Button>
       </div>
       <div className="flex justify-center flex-col items-center max-w-3xl m-auto gap-10 mb-20">
         <ProfilSection user={user as User} />
