@@ -56,6 +56,12 @@ const FormConnect = () => {
           setUser(data.user);
           setToken(data.token);
           router.push("/admin/dashboard");
+        })
+        .catch((err) => {
+          enqueueSnackbar("Erreur lors de la connexion veuillez réessayez", {
+            variant: "error",
+          });
+          console.error(err);
         });
     } else {
       enqueueSnackbar("Une erreur est survenue veuillez réessayer", {
@@ -82,6 +88,15 @@ const FormConnect = () => {
           setUser(data.user);
           setToken(data.token);
           router.push("/admin/dashboard");
+        })
+        .catch((err) => {
+          enqueueSnackbar(
+            "Erreur lors de la création de compte veuillez réessayez",
+            {
+              variant: "error",
+            }
+          );
+          console.error(err);
         });
     } else {
       enqueueSnackbar("Une erreur est survenue veuillez réessayer", {
