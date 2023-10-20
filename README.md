@@ -4,9 +4,9 @@ Welcome to ShortURL Generator, a simple application for creating shortcuts for y
 
 ## Synopsis
 
-This project was carried out as part of our training at [l'École Supérieure du Digital](https://ecole-du-digital.com/) in Bordeaux. It is an API project, and our goal was to create an API in a group of two people. We chose to develop an API for creating shortened URLs.
+This project was carried out as part of our training at [École Supérieure du Digital](https://ecole-du-digital.com/) in Bordeaux. It is an API project, and our goal was to create an API in a group of two people. We chose to develop an API for creating shortened URLs.
 
-Why did we choose this project? We are working in a company during our apprenticeship, and we often need to create shortened URLs. So, we decided to create an API that would allow us to generate shortened URLs, which we could use in our company.
+_Why did we choose this project ?_ We are working in a company during our apprenticeship, and we often need to create shortened URLs. So, we decided to create an API that would allow us to generate shortened URLs, which we could use in our company.
 
 ## Authors
 
@@ -35,7 +35,7 @@ Why did we choose this project? We are working in a company during our apprentic
 
 ## Installation
 
-### Prérequis
+### Prerequisites
 
 - [Node.js](https://nodejs.org/) installed on your machine
 - [Docker](https://www.docker.com/) installed on your machine
@@ -63,6 +63,8 @@ Why did we choose this project? We are working in a company during our apprentic
     NEXT_PUBLIC_BASE_URL=http://localhost:3000
     # Environment variables for connecting to the API
     NEXT_API_URL=http://localhost:8000/api/v0
+    # Environment variables for connecting to the API documentation
+    NEXT_PUBLIC_API_URL=http://localhost:8000
    ```
 
 4. Install dependencies:
@@ -125,7 +127,11 @@ If you want to use this application in local with the API, you have to follow th
    yarn start:dev
    ```
 
-7. Access the API documentation at [http://localhost:8000/api/v0/documentation-dev](http://localhost:8000/api/v0/documentation-dev).
+## Documentation
+
+Access the API developement documentation at [http://localhost:8000/documentation-dev](http://localhost:8000/api/v0/documentation-dev).
+
+Access the API production documentation at [http://localhost:8000/documentation](http://localhost:8000/api/v0/documentation-dev).
 
 ## Operation
 
