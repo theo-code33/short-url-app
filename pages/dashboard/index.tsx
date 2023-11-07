@@ -12,6 +12,9 @@ const Dashboard = () => {
   const { user, setUser } = useContext(UserContext);
   const router = useRouter();
 
+  const loginRoute = "/login";
+  const dashboardRoute = "/dashboard";
+
   useEffect(() => {
     if (!user?.email) {
       getUser();
@@ -22,7 +25,7 @@ const Dashboard = () => {
   const getUser = async () => {
     const token = (await getUserFromLocalToken()) as Token;
     if (token === null) {
-      router.push("/admin");
+      router.push(loginRoute);
       return;
     }
     await fetch(`/api/getOneByEmail?email=${token.email}`)
@@ -30,16 +33,16 @@ const Dashboard = () => {
       .then((data) => {
         if (data) {
           setUser(data);
-          router.push("/admin/dashboard");
+          router.push(dashboardRoute);
         } else {
           localStorage.removeItem("token");
-          router.push("/admin");
+          router.push(loginRoute);
         }
       })
       .catch((err) => {
         console.log(err);
         localStorage.removeItem("token");
-        router.push("/admin");
+        router.push(loginRoute);
       });
   };
   return (
