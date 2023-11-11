@@ -55,7 +55,7 @@ const FormConnect = () => {
           localStorage.setItem("token", data.token);
           setUser(data.user);
           setToken(data.token);
-          router.push("/admin/dashboard");
+          router.push("/dashboard");
         })
         .catch((err) => {
           enqueueSnackbar("Erreur lors de la connexion veuillez réessayez", {
@@ -87,7 +87,7 @@ const FormConnect = () => {
           localStorage.setItem("token", data.token);
           setUser(data.user);
           setToken(data.token);
-          router.push("/admin/dashboard");
+          router.push("/dashboard");
         })
         .catch((err) => {
           enqueueSnackbar(
