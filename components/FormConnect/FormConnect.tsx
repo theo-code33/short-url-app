@@ -12,6 +12,7 @@ import { UserConnect, UserCreate } from "@/types";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/router";
 import { enqueueSnackbar } from "notistack";
+import { validateEmail } from "@/utils/check";
 
 const FormConnect = () => {
   const [selected, setSelected] = useState("login");
@@ -46,6 +47,13 @@ const FormConnect = () => {
       userForm.email !== "" &&
       userForm.password !== ""
     ) {
+      if (!validateEmail(userForm.email)) {
+        enqueueSnackbar("Veuillez entrer une adresse mail valide", {
+          variant: "warning",
+          autoHideDuration: 3000,
+        });
+        return;
+      }
       fetch("/api/login", {
         method: "POST",
         body: JSON.stringify(userForm),
@@ -60,12 +68,13 @@ const FormConnect = () => {
         .catch((err) => {
           enqueueSnackbar("Erreur lors de la connexion veuillez réessayez", {
             variant: "error",
+            autoHideDuration: 3000,
           });
           console.error(err);
         });
     } else {
-      enqueueSnackbar("Une erreur est survenue veuillez réessayer", {
-        variant: "error",
+      enqueueSnackbar("Veuillez remplir tous les champs", {
+        variant: "warning",
       });
     }
   };
@@ -78,6 +87,20 @@ const FormConnect = () => {
       userForm.email !== "" &&
       userForm.password !== ""
     ) {
+      if (!validateEmail(userForm.email)) {
+        enqueueSnackbar("Veuillez entrer une adresse mail valide", {
+          variant: "warning",
+          autoHideDuration: 3000,
+        });
+        return;
+      }
+      if (userForm.password !== userForm.passwordConfirm) {
+        enqueueSnackbar("Les mots de passe ne correspondent pas", {
+          variant: "warning",
+          autoHideDuration: 3000,
+        });
+        return;
+      }
       fetch("/api/register", {
         method: "POST",
         body: JSON.stringify(userForm),
@@ -94,13 +117,15 @@ const FormConnect = () => {
             "Erreur lors de la création de compte veuillez réessayez",
             {
               variant: "error",
+              autoHideDuration: 3000,
             }
           );
           console.error(err);
         });
     } else {
-      enqueueSnackbar("Une erreur est survenue veuillez réessayer", {
-        variant: "error",
+      enqueueSnackbar("Veuillez remplir tous les champs", {
+        variant: "warning",
+        autoHideDuration: 3000,
       });
     }
   };
