@@ -11,7 +11,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.1.13",
     "@tabler/icons-react": "^2.39.0",
-    "axios": "^1.5.1",
+    "axios": "^1.6.0",
     "framer-motion": "^10.16.4",
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^3.1.2",
