@@ -1,12 +1,8 @@
-import { Button } from "@nextui-org/react";
+import Header from "@/components/Header";
 import { NextPage } from "next";
 
 const Index: NextPage = () => {
-  return (
-    <>
-      <Button>Click me</Button>
-    </>
-  );
+  return <Header />;
 };
 
 export default Index;
