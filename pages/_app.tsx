@@ -8,7 +8,14 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <UserContextProvider>
       <NextUIProvider>
-        <SnackbarProvider>
+        <SnackbarProvider
+          iconVariant={{
+            success: "✅",
+            error: "❌",
+            warning: "🚧",
+            info: "ℹ️",
+          }}
+        >
           <Component {...pageProps} />
         </SnackbarProvider>
       </NextUIProvider>
